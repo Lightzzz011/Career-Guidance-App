@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Registration</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>College Registration</h2>
+    <form id="registrationForm">
+      <input type="text" id="fullname" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="number" id="cgpa" placeholder="CGPA" required>
+      <textarea id="sop" placeholder="Statement of Purpose"></textarea>
+      <button type="submit">Register & Take Test</button>
+    </form>
+  </div>
+
+  <script type="module" src="js/firebaseConfig.js"></script>
+  <script type="module" src="js/db.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>Admin Login</h1>
+      <form id="admin-form">
+        <label>Email</label>
+        <input id="admin-email" type="email" required />
+        <label>Password</label>
+        <input id="admin-password" type="password" required />
+        <button type="submit">Login</button>
+      </form>
+      <div id="msg" class="message"></div>
+    </section>
+  </main>
+
+  <script type="module">
+    import { loginUser } from "./js/auth.js";
+
+    const form = document.getElementById("admin-form");
+    const msg = document.getElementById("msg");
+
+    form.addEventListener("submit", async (e)=>{
+      e.preventDefault();
+      const email = document.getElementById("admin-email").value;
+      const pass = document.getElementById("admin-password").value;
+      const res = await loginUser(email, pass);
+      if(res.ok){
+        msg.textContent = "Admin logged in!";
+        window.location.href = "college-signup.html";
+      } else {
+        msg.textContent = "Error: " + res.error;
+      }
+    });
+  </script>
+</body>
+</html>
