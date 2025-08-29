@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Student Profile</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <main class="container">
+    <section class="card" id="profile"></section>
+  </main>
+
+  <script type="module">
+    import { auth } from "./js/firebaseConfig.js";
+    import { getStudentById } from "./js/db.js";
+    import { onAuthChange } from "./js/auth.js";
+
+    const box = document.getElementById("profile");
+
+    onAuthChange(async (user)=>{
+      if(!user){ window.location.href = "index.html"; return; }
+      const s = await getStudentById(user.uid);
+      box.innerHTML = `
+        <div class="profile-header">
+          <h1>Welcome, ${s.name}</h1>
+          <button id="logout-btn">Logout</button>
+        </div>
+        <div class="profile-info">
+          <p><strong>Email:</strong> ${s.email}</p>
+          <p><strong>CGPA:</strong> ${s.cgpa || "-"}</p>
+        </div>
+        <div class="profile-actions">
+          <button onclick="window.location.href='college-list.html'">Browse Colleges</button>
+          <button onclick="window.location.href='aptitude-test.html'">Take Aptitude Test</button>
+        </div>
+      `;
+
+      document.getElementById("logout-btn").addEventListener("click", async ()=>{
+        await auth.signOut();
+        window.location.href = "index.html";
+      });
+    });
+  </script>
+</body>
+</html>

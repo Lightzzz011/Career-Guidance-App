@@ -8,26 +8,27 @@
 </head>
 <body>
   <main class="container">
-    <section class="card">
+    <section class="card login-card">
       <h1>Career Guidance</h1>
-      <p>Login to continue</p>
+      <p class="subtitle">Login to continue</p>
 
       <form id="login-form">
-        <label>Email</label>
-        <input id="email" type="email" required />
-        <label>Password</label>
-        <input id="password" type="password" required />
+        <input id="email" type="email" placeholder="Email" required />
+        <input id="password" type="password" placeholder="Password" required />
         <button type="submit">Login</button>
       </form>
 
-      <p>Don't have an account? <a href="signup.html">Sign up</a></p>
-      <p><a href="admin-login.html">Admin Login</a></p>
+      <div class="links">
+        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+        <p><a href="admin-login.html">Admin Login</a></p>
+      </div>
+
       <div id="message" class="message"></div>
     </section>
   </main>
 
   <script type="module">
-    import { loginUser, onAuthChange } from "./js/auth.js";
+    import { loginUser } from "./js/auth.js";
 
     const form = document.getElementById("login-form");
     const msg = document.getElementById("message");
@@ -41,16 +42,9 @@
       const res = await loginUser(email, password);
       if (res.ok) {
         msg.textContent = "Login successful! Redirecting...";
-       
         window.location.href = "student-details.html";
       } else {
         msg.textContent = "Error: " + res.error;
-      }
-    });
-
-    onAuthChange((user) => {
-      if (user) {
-     
       }
     });
   </script>

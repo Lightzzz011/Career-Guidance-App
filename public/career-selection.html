@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Selection</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Choose Your Career Path</h2>
+    <form id="careerForm">
+      <label>
+        <input type="radio" name="career" value="Engineering" required>
+        Engineering
+      </label>
+      <label>
+        <input type="radio" name="career" value="Management">
+        Management
+      </label>
+      <label>
+        <input type="radio" name="career" value="Other">
+        Other
+      </label>
+      <button type="submit">Next</button>
+    </form>
+  </div>
+
+  <script type="module" src="js/firebaseConfig.js"></script>
+  <script>
+    document.getElementById("careerForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      let career = document.querySelector("input[name='career']:checked").value;
+      localStorage.setItem("career", career);
+      window.location.href = "college-list.html";
+    });
+  </script>
+</body>
+</html>

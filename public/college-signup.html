@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Add College</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>Add College</h1>
+      <form id="college-form">
+        <label>College Name</label>
+        <input id="name" required />
+        <label>Location</label>
+        <select id="location">
+          <option>India</option>
+          <option>Abroad</option>
+        </select>
+        <label>Fees</label>
+        <input id="fees" type="number" required />
+        <label>Min CGPA</label>
+        <input id="cgpa" type="number" step="0.1" min="0" max="10" required/>
+        <label>Exam Requirement</label>
+        <input id="exam" placeholder="e.g. JEE, SAT"/>
+        <button type="submit">Add</button>
+      </form>
+      <div id="msg" class="message"></div>
+    </section>
+  </main>
+
+  <script type="module">
+    import { addCollege } from "./js/db.js";
+    import { auth } from "./js/firebaseConfig.js";
+
+    const form = document.getElementById("college-form");
+    const msg = document.getElementById("msg");
+
+    form.addEventListener("submit", async (e)=>{
+      e.preventDefault();
+      const payload = {
+        name: document.getElementById("name").value,
+        location: document.getElementById("location").value,
+        fees: parseInt(document.getElementById("fees").value),
+        eligibility: { cgpa: parseFloat(document.getElementById("cgpa").value), exam: document.getElementById("exam").value }
+      };
+      const res = await addCollege(payload, auth.currentUser?.uid);
+      msg.textContent = res.ok ? "College added!" : "Error: " + res.error;
+    });
+  </script>
+</body>
+</html>

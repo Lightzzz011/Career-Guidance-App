@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Career Guidance - Signup</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>Create an account</h1>
+      <form id="signup-form" autocomplete="on">
+        <label for="name">Full name</label>
+        <input id="name" name="name" type="text" required autocomplete="name" />
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required autocomplete="email" />
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required minlength="6" autocomplete="new-password" />
+
+        <label for="cgpa">CGPA (optional)</label>
+        <input id="cgpa" name="cgpa" type="number" step="0.01" min="0" max="10" autocomplete="off" />
+
+        <button type="submit">Sign Up</button>
+      </form>
+      <p>Already registered? <a href="index.html">Login</a></p>
+      <div id="message" class="message"></div>
+    </section>
+  </main>
+
+  <script type="module">
+    import { registerStudent } from "./js/auth.js";
+
+    const form = document.getElementById("signup-form");
+    const msg = document.getElementById("message");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const payload = {
+        name: document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        password: document.getElementById("password").value,
+        cgpa: parseFloat(document.getElementById("cgpa").value) || null,
+        role: "student"
+      };
+
+      msg.textContent = "Creating account...";
+
+      try {
+        const res = await registerStudent(payload);
+        if (res.ok) {
+          msg.textContent = "Account created. Redirecting to profile...";
+          window.location.href = "student-details.html";
+        } else {
+          msg.textContent = "Error: " + res.error;
+        }
+      } catch (error) {
+        msg.textContent = "Unexpected error: " + error.message;
+        console.error(error);
+      }
+    });
+  </script>
+</body>
+</html>

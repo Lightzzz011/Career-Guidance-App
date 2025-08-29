@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Location</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Select Location</h2>
+    <button onclick="selectLocation('India')">India</button>
+    <button onclick="selectLocation('Abroad')">Abroad</button>
+  </div>
+
+  <script type="module" src="js/firebaseConfig.js"></script>
+  <script>
+    function selectLocation(loc) {
+      localStorage.setItem("location", loc);
+      window.location.href = "career-selection.html";
+    }
+  </script>
+</body>
+</html>
