@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>College List</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>Available Colleges</h1>
+      <label>Filter by location:</label>
+      <select id="filter-location">
+        <option value="">All</option>
+        <option>India</option>
+        <option>Abroad</option>
+      </select>
+
+      <ul id="college-list"></ul>
+    </section>
+  </main>
+
+  <script type="module">
+    import { getColleges } from "./js/db.js";
+
+    const list = document.getElementById("college-list");
+    const filter = document.getElementById("filter-location");
+
+    async function load(location=null){
+      const colleges = await getColleges(location);
+      list.innerHTML = "";
+      colleges.forEach(c=>{
+        const li = document.createElement("li");
+        li.innerHTML = `<b>${c.name}</b> (${c.location}) - Fees: ${c.fees} 
+        <a href="college-details.html?id=${c.id}">View</a>`;
+        list.appendChild(li);
+      });
+    }
+
+    filter.addEventListener("change", e=> load(e.target.value));
+    load();
+  </script>
+</body>
+</html>

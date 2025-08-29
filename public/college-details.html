@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>College Details</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <main class="container">
+    <section class="card" id="details"></section>
+  </main>
+
+  <script type="module">
+    import { db } from "./js/firebaseConfig.js";
+    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    const box = document.getElementById("details");
+
+    async function load(){
+      const d = await getDoc(doc(db, "colleges", id));
+      if(!d.exists()){ box.textContent = "College not found"; return; }
+      const c = d.data();
+      box.innerHTML = `
+        <h1>${c.name}</h1>
+        <p><b>Location:</b> ${c.location}</p>
+        <p><b>Fees:</b> ₹${c.fees}</p>
+        <p><b>Eligibility:</b> CGPA ≥ ${c.eligibility.cgpa}, Exam: ${c.eligibility.exam || "N/A"}</p>
+        <a href="registration.html?college=${id}">Register</a>
+      `;
+    }
+    load();
+  </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Career Guidance - Login</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>Career Guidance</h1>
+      <p>Login to continue</p>
+
+      <form id="login-form">
+        <label>Email</label>
+        <input id="email" type="email" required />
+        <label>Password</label>
+        <input id="password" type="password" required />
+        <button type="submit">Login</button>
+      </form>
+
+      <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+      <p><a href="admin-login.html">Admin Login</a></p>
+      <div id="message" class="message"></div>
+    </section>
+  </main>
+
+  <script type="module">
+    import { loginUser, onAuthChange } from "./js/auth.js";
+
+    const form = document.getElementById("login-form");
+    const msg = document.getElementById("message");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      msg.textContent = "Logging in...";
+
+      const res = await loginUser(email, password);
+      if (res.ok) {
+        msg.textContent = "Login successful! Redirecting...";
+       
+        window.location.href = "student-details.html";
+      } else {
+        msg.textContent = "Error: " + res.error;
+      }
+    });
+
+    onAuthChange((user) => {
+      if (user) {
+     
+      }
+    });
+  </script>
+</body>
+</html>
