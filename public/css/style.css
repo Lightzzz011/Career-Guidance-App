@@ -1,5 +1,10 @@
 /* Reset & global */
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
 body {
   background: linear-gradient(135deg, #f0f3f7, #d9e2ec);
@@ -15,6 +20,7 @@ body {
   padding: 1rem;
 }
 
+/* Generic card styling */
 .card {
   background: #fff;
   border-radius: 15px;
@@ -23,15 +29,20 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  animation: fadeIn 0.6s ease-in-out;
 }
 
+/* Profile page card */
 .profile-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.profile-header h1 { font-size: 1.5rem; color: #333; }
+.profile-header h1 {
+  font-size: 1.5rem;
+  color: #333;
+}
 
 #logout-btn {
   background: #ff4d6d;
@@ -44,10 +55,19 @@ body {
   transition: all 0.3s ease;
 }
 
-#logout-btn:hover { background: #e8435d; }
+#logout-btn:hover {
+  background: #e8435d;
+}
 
-.profile-info p { font-size: 1.1rem; color: #555; margin-bottom: 0.5rem; }
-.profile-info strong { color: #333; }
+.profile-info p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.profile-info strong {
+  color: #333;
+}
 
 .profile-actions {
   display: flex;
@@ -73,7 +93,9 @@ body {
 }
 
 @media (max-width: 500px) {
-  .profile-actions button { flex: 100%; }
+  .profile-actions button {
+    flex: 100%;
+  }
 }
 
 /* Login card styling */
@@ -97,10 +119,16 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.login-card label {
+  text-align: left;
+  font-weight: 600;
+  color: #444;
+  font-size: 0.9rem;
+}
+
 .login-card input {
   width: 100%;
   padding: 0.8rem 1rem;
-  margin-bottom: 1rem;
   border-radius: 10px;
   border: 1px solid #ccc;
   font-size: 1rem;
@@ -115,11 +143,12 @@ body {
 
 .login-card button {
   width: 100%;
-  padding: 0.8rem 1rem;
+  padding: 0.9rem 1rem;
   border-radius: 10px;
   border: none;
   background: linear-gradient(90deg, #6a11cb, #2575fc);
   color: white;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -145,8 +174,201 @@ body {
   text-decoration: underline;
 }
 
+/* Message feedback */
 .message {
-  color: #e74c3c;
   font-weight: bold;
   margin-top: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.message.error {
+  color: #e74c3c;
+}
+
+.message.success {
+  color: #27ae60;
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Reset & global */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #f0f3f7, #d9e2ec);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  padding: 1rem;
+}
+
+/* Generic card styling (used in profile) */
+.card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* =========================
+   Admin Login card styling
+   ========================= */
+.card h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+}
+
+.card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card label {
+  text-align: left;
+  font-weight: 600;
+  color: #444;
+  font-size: 0.9rem;
+}
+
+.card input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.card input:focus {
+  border-color: #6a11cb;
+  outline: none;
+  box-shadow: 0 0 8px rgba(106,17,203,0.3);
+}
+
+.card button {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Login message */
+.message {
+  font-weight: bold;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.message.error {
+  color: #e74c3c;
+}
+
+.message.success {
+  color: #27ae60;
+}
+
+/* =========================
+   Profile page styles
+   ========================= */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-header h1 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+#logout-btn {
+  background: #ff4d6d;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+#logout-btn:hover {
+  background: #e8435d;
+}
+
+.profile-info p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.profile-info strong {
+  color: #333;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.profile-actions button {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.profile-actions button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 500px) {
+  .profile-actions button {
+    flex: 100%;
+  }
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
